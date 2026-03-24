@@ -14,7 +14,6 @@ int     main(void) {
   pthread_t     t2;
   pthread_t     t3;
   pthread_t     t4;
-  int i =  0;
 
   pthread_create(&t1, NULL, contagem, NULL);
   pthread_create(&t2, NULL, contagem, NULL);
