@@ -1,12 +1,28 @@
 #include <stdio.h>
 #include <pthread.h>
 
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+int condicao = 0;
+
 void* contagem(){
-    pthread_t id = pthread_self();
-    int i = 0;
-    for(i;i<100;i++){
-        printf("Thread %lu -> %i\n",id,i);
-    }
+
+  pthread_mutex_lock(&mutex);
+
+  int idT = condicao;
+  condicao++;
+
+  while (condicao != 4) {
+    pthread_cond_wait(&cond, &mutex);
+  }
+    pthread_cond_broadcast(&cond);
+
+  pthread_mutex_unlock(&mutex);
+
+  int i = 0;
+  for(i;i<100;i++){
+    printf("Thread %i -> %i\n",idT,i);
+  }
 }
 
 int     main(void) {
@@ -14,6 +30,7 @@ int     main(void) {
   pthread_t     t2;
   pthread_t     t3;
   pthread_t     t4;
+
 
   pthread_create(&t1, NULL, contagem, NULL);
   pthread_create(&t2, NULL, contagem, NULL);
