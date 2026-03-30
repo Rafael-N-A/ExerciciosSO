@@ -23,6 +23,7 @@ void* contagem(){
   for(i;i<100;i++){
     printf("Thread %i -> %i\n",idT,i);
   }
+  printf("Thread %i VENCEU\n",idT);
 }
 
 int     main(void) {
