@@ -15,7 +15,7 @@ void* contagem(){
   while (condicao != 4) {
     pthread_cond_wait(&cond, &mutex);
   }
-    pthread_cond_broadcast(&cond);
+    pthread_cond_broadcast(&cond
 
   pthread_mutex_unlock(&mutex);
 
@@ -27,10 +27,7 @@ void* contagem(){
 }
 
 int     main(void) {
-  pthread_t     t1;
-  pthread_t     t2;
-  pthread_t     t3;
-  pthread_t     t4;
+  pthread_t     t1,t2,t3,t4;
 
 
   pthread_create(&t1, NULL, contagem, NULL);
