@@ -15,7 +15,7 @@ void* contagem(){
   while (condicao != 4) {
     pthread_cond_wait(&cond, &mutex);
   }
-    pthread_cond_broadcast(&cond
+    pthread_cond_broadcast(&cond);
 
   pthread_mutex_unlock(&mutex);
 
@@ -23,12 +23,13 @@ void* contagem(){
   for(i;i<100;i++){
     printf("Thread %i -> %i\n",idT,i);
   }
-  printf("Thread %i VENCEU\n",idT);
+
+  printf("Thread %i TERMINOU\n",idT);
 }
 
-int     main(void) {
-  pthread_t     t1,t2,t3,t4;
 
+int main(void) {
+  pthread_t t1,t2,t3,t4;
 
   pthread_create(&t1, NULL, contagem, NULL);
   pthread_create(&t2, NULL, contagem, NULL);
